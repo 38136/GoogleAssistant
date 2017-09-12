@@ -30,9 +30,14 @@ app.post('/', function (request, response) {
 
 
     function WelcomeSpeach(assistant) {
-        var reply = "Welcome to Flight Track.. give me you flight number will let you know";
+        var reply = "Welcome to Flight Track.. give me you flight number will let you know currently where the flight is";
+        
+        assistant.ask({
+            speech: 'hello',
+            displayText: 'hi'
+        });
         // ask vs. tell -> expects reply vs. doesn't expect reply
-        assistant.ask(reply);
+        // assistant.ask(reply);
     }
 
     let actionMap = new Map();
