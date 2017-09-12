@@ -11,7 +11,7 @@ app.use(bodyParser.json({
     type: 'application/json'
 }));
 
-const realZombies = "realZombies";
+const FlightTrackByID = "Default Welcome Intent";
 
 app.post('/', function (request, response) {
     const assistant = new Assistant({
@@ -58,7 +58,7 @@ app.post('/', function (request, response) {
   }
 
     let actionMap = new Map();
-    actionMap.set(realZombies, provideDetails);
+    actionMap.set(FlightTrackByID, provideDetails);
     assistant.handleRequest(actionMap);
 });
 
