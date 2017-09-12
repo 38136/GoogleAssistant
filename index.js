@@ -47,7 +47,9 @@ app.post('/', function (request, response) {
     assistant.handleRequest(actionMap);
 });
 
-
+app.get('/', function (req, res) {
+  res.send("Server is up and running.")
+});
 
 var server = app.listen(app.get('port'), function () {
     console.log('App listening on port %s', server.address().port);
