@@ -11,7 +11,7 @@ app.use(bodyParser.json({
     type: 'application/json'
 }));
 
-const FlightTrackByID = "Default Welcome Intent";
+const FlightTrackByID = "welcome";
 
 app.post('/', function (request, response) {
     const assistant = new Assistant({
