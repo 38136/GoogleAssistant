@@ -21,7 +21,7 @@ const Help_Intent = "HelpIntent";
 const WelcomeIntent = "input.welcome";
 const quit_Intent = "quit_Intent";
 
-app.post('/', function (request, response) {
+app.post('/google', function (request, response) {
     const assistant = new Assistant({
         request: request,
         response: response
@@ -31,7 +31,7 @@ app.post('/', function (request, response) {
 
     function WelcomeSpeach(assistant) {
         var reply = "Welcome to Flight Track.. give me you flight number will let you know currently where the flight is";
-        
+
         assistant.ask({
             speech: 'hello',
             displayText: 'hi'
@@ -45,10 +45,29 @@ app.post('/', function (request, response) {
     actionMap.set(TrackByStarting_Date, provideDetailsByDate);
     actionMap.set(WelcomeIntent, WelcomeSpeach);
     assistant.handleRequest(actionMap);
+
+
+    function responseHandler(assistant) {
+        console.log("okok")
+        // intent contains the name of the intent you defined in the Actions area of API.AI
+        let intent = assistant.getIntent();
+        switch (intent) {
+            case WelcomeIntent:
+                assistant.ask('Welcome! Say a number.');
+                break;
+
+            // case quit_Intent:
+            //     let number = assistant.getArgument(NUMBER_ARGUMENT);
+            //     assistant.tell('You said ' + number);
+            //     break;
+        }
+    }
+    assistant.handleRequest(responseHandler);
+
 });
 
 app.get('/', function (req, res) {
-  res.send("Server is up and running.")
+    res.send("Server is up and running.")
 });
 
 var server = app.listen(app.get('port'), function () {
