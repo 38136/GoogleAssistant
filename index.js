@@ -1,4 +1,6 @@
-const Assistant = require('actions-on-google').ApiAiApp;
+process.env.DEBUG = 'actions-on-google:*';
+
+let Assistant = require('actions-on-google').ApiAiApp;
 let express = require('express');
 let bodyParser = require('body-parser');
 let request_lib = require('request'); // for sending the http requests to Numbers API
@@ -11,54 +13,32 @@ app.use(bodyParser.json({
     type: 'application/json'
 }));
 
-const FlightTrackByID = "welcome";
+// get by action
+
+const TrackByFlight_ID = "TrackByFlightID";
+const TrackByStarting_Date = "TrackByStartingDate";
+const Help_Intent = "HelpIntent";
+const WelcomeIntent = "input.welcome";
+const quit_Intent = "quit_Intent";
 
 app.post('/', function (request, response) {
     const assistant = new Assistant({
         request: request,
         response: response
     });
+    console.log('step-2');
 
-    // function provideFact(assistant) {
-    //     var number;
-    //     var url = NUMBERS_API_BASE_URL;
-    //     var type;
 
-    //     for (var fact_type in FACT_TYPES) {
-    //         console.log('fact_type=' + fact_type);
-    //         if (assistant.getArgument(fact_type) != null) {
-    //             type = fact_type;
-    //             break;
-    //         }
-    //     }
-
-    //     if (type == null) type = DEFAULT_TYPE;
-    //     assert(typeof (type) != "undefined", 'fact type is undefined');
-
-    //     console.log("type=" + type);
-
-    //     if (type == MATH_ARGUMENT || type == DEFAULT_TYPE) {
-    //         number = assistant.getArgument(NUMBER_ARGUMENT);
-    //     } else {
-    //         console.log("Arg=" + assistant.getArgument(type));
-    //         number = extractNumber(assistant.getArgument(type), type);
-    //     }
-
-    //     assert(number, 'number is null');
-    //     console.log("number = " + number);
-
-    //     url += "/" + number + "/" + FACT_TYPES[type];
-    //     sendRequest(url, callback);
-    // }
-
-      function provideDetails(assistant) {
-    var reply = "Welcome to Number Facts! What number is on your mind?";
-    // ask vs. tell -> expects reply vs. doesn't expect reply
-    assistant.ask(reply);
-  }
+    function WelcomeSpeach(assistant) {
+        var reply = "Welcome to Flight Track.. give me you flight number will let you know";
+        // ask vs. tell -> expects reply vs. doesn't expect reply
+        assistant.ask(reply);
+    }
 
     let actionMap = new Map();
-    actionMap.set(FlightTrackByID, provideDetails);
+    actionMap.set(TrackByFlight_ID, provideDetailsByID);
+    actionMap.set(TrackByStarting_Date, provideDetailsByDate);
+    actionMap.set(WelcomeIntent, WelcomeSpeach);
     assistant.handleRequest(actionMap);
 });
 

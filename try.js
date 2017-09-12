@@ -9,13 +9,15 @@ let assert = require('assert');
 let app = express();
 
 app.set('port', (process.env.PORT || 8080));
-app.use(bodyParser.json({type: 'application/json'}));
+app.use(bodyParser.json({
+  type: 'application/json'
+}));
 // name of the actions -- correspond to the names I defined in the API.AI console
 const PROVIDE_FACT = "provide_fact";
 const PLAY_AGAIN_YES = "play_again_yes";
 const PLAY_AGAIN_NO = "play_again_no";
 const DEFAULT_WELCOME = "input.welcome";
-const CONTEXT_PLAY_AGAIN = "again_yes_no"; 
+const CONTEXT_PLAY_AGAIN = "again_yes_no";
 const NUMBER_ARGUMENT = "number";
 const DATE_ARGUMENT = "date";
 const YEAR_ARGUMENT = "date-period";
@@ -32,20 +34,23 @@ const FACT_TYPES = {};
 // need to put the variables into dictionary by hand. 
 // see http://stackoverflow.com/questions/10640159/key-for-javascript-dictionary-is-not-stored-as-value-but-as-variable-name
 FACT_TYPES[DATE_ARGUMENT] = 'date';
-FACT_TYPES[YEAR_ARGUMENT] = 'year'; 
+FACT_TYPES[YEAR_ARGUMENT] = 'year';
 FACT_TYPES[MATH_ARGUMENT] = 'math';
 FACT_TYPES[DEFAULT_TYPE] = 'trivia';
 const NUMBERS_API_BASE_URL = "http://numbersapi.com";
 const HELP_MESSAGE = "I didn't get that. You can ask me about any number. You can also ask me about " +
-                                                                     FACT_TYPES[DATE_ARGUMENT] + ", " + 
-                                                                 FACT_TYPES[YEAR_ARGUMENT] + ", and " + 
-                                                                            FACT_TYPES[MATH_ARGUMENT] + 
-                                                                     " that this number represents. " + 
-                                                 "For example, you can say: 'Tell me about 777', or " +
-                                                                       "'Tell me some math about 777'."; 
+  FACT_TYPES[DATE_ARGUMENT] + ", " +
+  FACT_TYPES[YEAR_ARGUMENT] + ", and " +
+  FACT_TYPES[MATH_ARGUMENT] +
+  " that this number represents. " +
+  "For example, you can say: 'Tell me about 777', or " +
+  "'Tell me some math about 777'.";
 
-app.post('/', function(request, response) {
-  const assistant = new Assistant({request: request, response: response});
+app.post('/', function (request, response) {
+  const assistant = new Assistant({
+    request: request,
+    response: response
+  });
 
 
   /**
@@ -75,7 +80,7 @@ app.post('/', function(request, response) {
     }
 
     if (type == null) type = DEFAULT_TYPE;
-    assert(typeof(type) != "undefined", 'fact type is undefined');
+    assert(typeof (type) != "undefined", 'fact type is undefined');
 
     console.log("type=" + type);
 
@@ -89,7 +94,7 @@ app.post('/', function(request, response) {
     assert(number, 'number is null');
     console.log("number = " + number);
 
-    url += "/" + number + "/" + FACT_TYPES[type]; 
+    url += "/" + number + "/" + FACT_TYPES[type];
     sendRequest(url, callback);
   }
 
@@ -114,8 +119,8 @@ app.post('/', function(request, response) {
    */
   function sendRequest(url, callback) {
     console.log("Sending GET to " + url);
-    request_lib.get(url, function(error, response, body) {
-      if (!error && response.statusCode == 200) { 
+    request_lib.get(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
         console.log("Fact is " + body);
         callback(body);
       } else {
@@ -161,14 +166,14 @@ app.post('/', function(request, response) {
   //testSendRequest();
   let actionMap = new Map();
   actionMap.set(PROVIDE_FACT, provideFact);
-  actionMap.set(DEFAULT_WELCOME, welcome); 
+  actionMap.set(DEFAULT_WELCOME, welcome);
   actionMap.set(PLAY_AGAIN_YES, playAgainYes);
-  actionMap.set(PLAY_AGAIN_NO, playAgainNo); 
-  actionMap.set(DEFAULT_FALLBACK, fallback); 
+  actionMap.set(PLAY_AGAIN_NO, playAgainNo);
+  actionMap.set(DEFAULT_FALLBACK, fallback);
   assistant.handleRequest(actionMap);
 });
 
-var server = app.listen(app.get('port'), function() {
+var server = app.listen(app.get('port'), function () {
   console.log('App listening on port %s', server.address().port);
   console.log('Press Ctrl+C to quit.');
 });
