@@ -86,6 +86,7 @@ app.post('/', function (req, res) {
                     let maxPositions = res.body.request.maxPositions.requested;
                     let fLNumber = res.body.flightTrack.flightNumber;
                     let carrierCode = res.body.flightTrack.carrierFsCode;
+                    // "dateLocal": "2017-09-14T07:05:00.000",
                     let departureDate = res.body.flightTrack.departureDate.dateLocal;
                     let airName = res.body.appendix.airlines[0].name;
                     let airPortName = res.body.appendix.airports[0].name;
@@ -94,17 +95,19 @@ app.post('/', function (req, res) {
                     let airPortregionName = res.body.appendix.airports[0].regionName;
                     let airPortlat = res.body.appendix.airports[0].latitude;
                     let airPortlong = res.body.appendix.airports[0].longitude;
+                    
+                    var deptdate = new Date(departureDate);
 
                     console.log("logging flight id " + flightId);
 
-                    FlightTrackdata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
+                    FlightTrackdata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is ${departureDate} and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
                     assistant.ask(FlightTrackdata);
                     //  response.say(JSON.stringify(res));
                     response.send();
                 });
             return p;
         } else {
-            assistant.ask("please tell me your Flight Number");
+            assistant.ask("please tell me your Flight Id Number");
         }
     }
     // ---------------------------------------search by date------------------
