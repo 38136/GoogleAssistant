@@ -23,13 +23,13 @@ const quit_Intent = "quit_Intent";
 
 
 
-app.post('/google', function (req, res) {
+app.post('/', function (req, res) {
     const assistant = new Assistant({
         request: req,
         response: res
     });
     var intent = assistant.getIntent();
-    console.log(intent);
+    console.log("hi this is intent" + intent);
 
 
     function WelcomeSpeach(assistant) {
