@@ -21,8 +21,6 @@ const Help_Intent = "HelpIntent";
 const WelcomeIntent = "input.welcome";
 const quit_Intent = "quit_Intent";
 
-
-
 app.post('/', function (req, res) {
     const assistant = new Assistant({
         request: req,
@@ -31,24 +29,27 @@ app.post('/', function (req, res) {
     var intent = assistant.getIntent();
     console.log("hi this is intent" + intent);
 
-
     function WelcomeSpeach(assistant) {
         console.log("this is assistant" + assistant);
-
         var reply = "Welcome to Flight Track.. give me you flight number will let you know currently where the flight is";
-
-        // assistant.ask({
-        //     speech: 'hello',
-        //     displayText: 'hi'
-        // });
         assistant.ask(reply);
+    }
+
+    function provideDetailsByID(assistant) {
+        let flightNumber = assistant.getArgument('flightNumber');
+        if (flightNumber !== "") {
+            console.log("flight number is" + flightNumber);
+            assistant.ask("Flight is on the way of lat and log");
+        } else {
+            assistant.ask("Tell me your flight number please");
+        }
     }
 
     let actionMap = new Map();
     let actionSee = actionMap.get(TrackByFlight_ID);
     console.log("this is action" + actionSee);
 
-    // actionMap.set(TrackByFlight_ID, provideDetailsByID);
+    actionMap.set(TrackByFlight_ID, provideDetailsByID);
     // actionMap.set(TrackByStarting_Date, provideDetailsByDate);
     actionMap.set(WelcomeIntent, WelcomeSpeach);
     assistant.handleRequest(actionMap);
