@@ -33,6 +33,8 @@ app.post('/', function (req, res) {
 
 
     function WelcomeSpeach(assistant) {
+        console.log("this is assistant" + assistant);
+
         var reply = "Welcome to Flight Track.. give me you flight number will let you know currently where the flight is";
 
         // assistant.ask({
@@ -46,8 +48,8 @@ app.post('/', function (req, res) {
     let actionSee = actionMap.get(TrackByFlight_ID);
     console.log("this is action" + actionSee);
 
-    actionMap.set(TrackByFlight_ID, provideDetailsByID);
-    actionMap.set(TrackByStarting_Date, provideDetailsByDate);
+    // actionMap.set(TrackByFlight_ID, provideDetailsByID);
+    // actionMap.set(TrackByStarting_Date, provideDetailsByDate);
     actionMap.set(WelcomeIntent, WelcomeSpeach);
     assistant.handleRequest(actionMap);
 

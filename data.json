@@ -1,0 +1,84 @@
+{
+    "originalRequest": {
+        "source": "google",
+        "version": "2",
+        "data": {
+            "isInSandbox": true,
+            "surface": {
+                "capabilities": [{
+                    "name": "actions.capability.AUDIO_OUTPUT"
+                }, {
+                    "name": "actions.capability.SCREEN_OUTPUT"
+                }]
+            },
+            "inputs": [{
+                "rawInputs": [{
+                    "query": "talk to my test app",
+                    "inputType": "KEYBOARD"
+                }],
+                "intent": "actions.intent.MAIN"
+            }],
+            "user": {
+                "locale": "en-US",
+                "userId": "AP8TWv7U0gV4xwEuLaZ__fu3aZIP"
+            },
+            "device": {},
+            "conversation": {
+                "conversationId": "1505276580091",
+                "type": "NEW"
+            }
+        }
+    },
+    "id": "efea2d41-4e97-4e04-a9b7-3708b0f4d320",
+    "timestamp": "2017-09-13T04:23:00.246Z",
+    "lang": "en",
+    "result": {
+        "source": "agent",
+        "resolvedQuery": "GOOGLE_ASSISTANT_WELCOME",
+        "speech": "",
+        "action": "input.welcome",
+        "actionIncomplete": false,
+        "parameters": {},
+        "contexts": [{
+            "name": "google_assistant_welcome",
+            "parameters": {},
+            "lifespan": 0
+        }, {
+            "name": "actions_capability_screen_output",
+            "parameters": {},
+            "lifespan": 0
+        }, {
+            "name": "actions_capability_audio_output",
+            "parameters": {},
+            "lifespan": 0
+        }, {
+            "name": "google_assistant_input_type_keyboard",
+            "parameters": {},
+            "lifespan": 0
+        }],
+        "metadata": {
+            "intentId": "6140c601-0f1a-4c33-9a00-5763b0f29460",
+            "webhookUsed": "true",
+            "webhookForSlotFillingUsed": "false",
+            "nluResponseTime": 1,
+            "intentName": "Default Welcome Intent"
+        },
+        "fulfillment": {
+            "speech": "Welcome",
+            "messages": [{
+                "type": 0,
+                "platform": "slack",
+                "speech": "Welcome"
+            }, {
+                "type": 0,
+                "speech": "Welcome"
+            }]
+        },
+        "score": 1
+    },
+    "status": {
+        "code": 200,
+        "errorType": "success"
+    },
+    "sessionId": "1505276580091"
+}
