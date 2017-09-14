@@ -147,7 +147,7 @@ app.post('/', function (req, res) {
                         // 933427129 flight number
                         // https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/AA/100/arr/2017/09/13?appId=6aac18a6&appKey=40a7e359cb020a07ead5159c2d5d8162&utc=false&includeFlightPlan=false&maxPositions=2
                         // uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/track/${flightNumber_url}?appId=${apiId}&appKey=${apiKey}&includeFlightPlan=false&maxPositions=2`,
-                        uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/${AirLineCode}/${flightNumber}/arr/${year}/${month}/${date}?appId=6aac18a6&appKey=40a7e359cb020a07ead5159c2d5d8162&utc=false&includeFlightPlan=false&maxPositions=2`,
+                        uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/${AirLineCode}/${flightNumber}/arr/${year}/${month}/${day}?appId=6aac18a6&appKey=40a7e359cb020a07ead5159c2d5d8162&utc=false&includeFlightPlan=false&maxPositions=2`,
                         json: true,
                         resolveWithFullResponse: true,
                     };
