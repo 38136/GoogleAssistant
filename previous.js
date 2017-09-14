@@ -9,8 +9,8 @@ var assert = require('assert');
 var rp = require('request-promise');
 let apiId = process.env.API_ID;
 let apiKey = process.env.API_key;
-console.log(apiId);
-console.log(apiKey);
+// console.log(apiId);
+// console.log(apiKey);
 var app = express();
 
 app.set('port', (process.env.PORT || 8080));
@@ -64,21 +64,18 @@ app.post('/', function (req, res) {
 
     function provideDetailsByID(request, response) {
         var flightNumber_url = assistant.getArgument('flightNumber');
-        console.log("the flight number is " + flightNumber_url);
         console.log("the response is " + response);
         if (flightNumber_url) {
-            console.log(apiId);
-            console.log(apiKey);
             var p = Promise.resolve();
             var getDetails = {
                 method: 'GET',
                 // 933427129 flight number
-                uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/track/${flightNumber_url}?appId=6aac18a6&appKey=40a7e359cb020a07ead5159c2d5d8162&includeFlightPlan=false&maxPositions=2`,
-                // uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/track/${flightNumber_url}?appId=${apiId}&appKey=${apiKey}&includeFlightPlan=false&maxPositions=2`,
+                // uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/track/933427129?appId=6aac18a6&appKey=40a7e359cb020a07ead5159c2d5d8162&includeFlightPlan=false&maxPositions=2`,
+                uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/track/${flightNumber_url}?appId=${apiId}&appKey=${apiKey}&includeFlightPlan=false&maxPositions=2`,
                 json: true,
                 resolveWithFullResponse: true,
             };
-            console.log("get details log " + JSON.stringify(getDetails));
+            console.log("get details log " + getDetails);
             p = rp(getDetails)
                 .then(function (res) {
                     let flightId = res.body.request.flightId.requested;
@@ -116,17 +113,13 @@ app.post('/', function (req, res) {
         var flightNumber = assistant.getArgument('flightNumber');
         console.log("date is been displayed" + startDate);
         console.log("the response is " + response);
-        var year = Date(startDate).getFullYear();
+        var year = Date(startDate).year;
 
-        var month = Date(startDate).getMonth();
-        var day = Date(startDate).getDate();
+        var month = Date(startDate).month;
+        var day = Date(startDate).day;
         console.log("this is year" + year);
         console.log("this is month" + month);
         console.log("this is day" + day);
-
-
-        let binddate = month + "/" + day + "/" + year;
-
         if (flightNumber) {
             if (AirLineCode) {
                 if (startDate) {
@@ -136,7 +129,7 @@ app.post('/', function (req, res) {
                         // 933427129 flight number
                         // https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/AA/100/arr/2017/09/13?appId=6aac18a6&appKey=40a7e359cb020a07ead5159c2d5d8162&utc=false&includeFlightPlan=false&maxPositions=2
                         // uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/track/${flightNumber_url}?appId=${apiId}&appKey=${apiKey}&includeFlightPlan=false&maxPositions=2`,
-                        uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/${AirLineCode}/${flightNumber}/arr/${year}/${month}/${date}?appId=6aac18a6&appKey=40a7e359cb020a07ead5159c2d5d8162&utc=false&includeFlightPlan=false&maxPositions=2`,
+                        uri: `https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/${AirLineCode}/${flightNumber}/arr/${year}/${month}/${date}?appId=${apiId}&appKey=${apiKey}&utc=false&includeFlightPlan=false&maxPositions=2`,
                         json: true,
                         resolveWithFullResponse: true,
                     };
