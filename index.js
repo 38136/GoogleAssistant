@@ -135,6 +135,8 @@ app.post('/', function (req, res) {
         console.log("the hours is :" + year);
         console.log("the hours is :" + month);
         console.log("the hours is :" + day);
+        console.log("the response is " + AirLineCode);
+        console.log("the response is " + flightNumber);
 
 
 
