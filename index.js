@@ -138,29 +138,10 @@ app.post('/', function (req, res) {
         console.log("the response is " + AirLineCode);
         console.log("the response is " + flightNumber);
 
-
-
-        // var year = Date(startDate).getFullYear();
-
-        // var month = Date(startDate).getMonth();
-        // var day = Date(startDate).getDate();
-
-        // var year = Date(startDate).getFullYear();
-
-        // var month = Date(startDate).getMonth();
-        // var day = Date(startDate).getDate();
-
-        // console.log("this is year" + year);
-        // console.log("this is month" + month);
-        // console.log("this is day" + day);
-
-
-        // let binddate = month + "/" + day + "/" + year;
-
         if (flightNumber) {
             if (AirLineCode) {
                 if (startDate) {
-                    var p = Promise.resolve();
+                    var k = Promise.resolve();
                     var getDetails_date = {
                         method: 'GET',
                         // 933427129 flight number
@@ -170,9 +151,12 @@ app.post('/', function (req, res) {
                         json: true,
                         resolveWithFullResponse: true,
                     };
-                    console.log("get details log " + getDetails_date);
-                    p = rp(getDetails_date)
+                    console.log("get details log " + JSON.stringify(getDetails_date));
+                    k = rp(getDetails_date)
                         .then(function (res) {
+
+                            console.log("this is res inside the function"+JSON.stringify(res))
+
                             let flightId = res.body.request.airline.requestedCode;
                             let maxPositions = res.body.request.maxPositions.requested;
                             let fLNumber = res.body.flightTrack[0].flightNumber;
@@ -188,13 +172,14 @@ app.post('/', function (req, res) {
                             let airPortlong = res.body.appendix.airports[0].longitude;
 
                             console.log("logging flight id " + flightId);
+                            console.log("logging maxPositions " + maxPositions);
 
                             FlightTrackByDatedata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong} `;
                             assistant.ask(FlightTrackByDatedata);
                             //  response.say(JSON.stringify(res));
                             response.send();
                         });
-                    return p;
+                    return k;
                 } else {
                     assistant.ask("please give me your Arrival date");
                 }

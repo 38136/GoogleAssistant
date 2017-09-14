@@ -574,8 +574,8 @@
         "date": {
             "year": "2017",
             "month": "9",
-            "day": "13",
-            "interpreted": "2017-09-13"
+            "day": "14",
+            "interpreted": "2017-09-14"
         },
         "hourOfDay": {
             "interpreted": 0
@@ -599,7 +599,7 @@
         "maxPositionAgeMinutes": {},
         "codeType": {},
         "extendedOptions": {},
-        "url": "https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/AA/100/arr/2017/09/13"
+        "url": "https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/tracks/AA/100/arr/2017/09/14"
     },
     "appendix": {
         "airlines": [{
@@ -626,7 +626,7 @@
             "regionName": "North America",
             "timeZoneRegionName": "America/New_York",
             "weatherZone": "NYZ178",
-            "localTime": "2017-09-13T07:04:31.020",
+            "localTime": "2017-09-14T00:07:06.745",
             "utcOffsetHours": -4.0,
             "latitude": 40.642335,
             "longitude": -73.78817,
@@ -647,7 +647,7 @@
             "countryName": "United Kingdom",
             "regionName": "Europe",
             "timeZoneRegionName": "Europe/London",
-            "localTime": "2017-09-13T12:04:31.020",
+            "localTime": "2017-09-14T05:07:06.745",
             "utcOffsetHours": 1.0,
             "latitude": 51.469603,
             "longitude": -0.453566,
@@ -659,34 +659,34 @@
         }]
     },
     "flightTracks": [{
-        "flightId": 933194788,
+        "flightId": 933302148,
         "carrierFsCode": "AA",
         "flightNumber": "100",
-        "tailNumber": "N720AN",
+        "tailNumber": "N732AN",
         "departureAirportFsCode": "JFK",
         "arrivalAirportFsCode": "LHR",
         "departureDate": {
-            "dateLocal": "2017-09-12T18:20:00.000",
-            "dateUtc": "2017-09-12T22:20:00.000Z"
+            "dateLocal": "2017-09-13T18:20:00.000",
+            "dateUtc": "2017-09-13T22:20:00.000Z"
         },
         "equipment": "77W",
-        "delayMinutes": 38,
-        "bearing": 22.98298036526818,
-        "heading": 270.0019555693072,
+        "delayMinutes": 43,
+        "bearing": 98.50870967498237,
+        "heading": 98.2879167265285,
         "positions": [{
-            "lon": -0.4567,
-            "lat": 51.465,
-            "speedMph": 136,
-            "altitudeFt": 228,
+            "lon": -21.6984,
+            "lat": 55.4042,
+            "speedMph": 610,
+            "altitudeFt": 34000,
             "source": "derived",
-            "date": "2017-09-13T05:07:18.000Z"
+            "date": "2017-09-14T04:01:11.000Z"
         }, {
-            "lon": -0.4517,
-            "lat": 51.465,
-            "speedMph": 136,
-            "altitudeFt": 294,
+            "lon": -21.9551,
+            "lat": 55.4257,
+            "speedMph": 610,
+            "altitudeFt": 34000,
             "source": "derived",
-            "date": "2017-09-13T05:07:12.000Z"
+            "date": "2017-09-14T04:00:11.000Z"
         }]
     }]
 }
