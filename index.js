@@ -155,13 +155,15 @@ app.post('/', function (req, res) {
                     k = rp(getDetails_date)
                         .then(function (res) {
 
-                            console.log("this is res inside the function"+JSON.stringify(res))
+                            console.log("this is res inside the function" + JSON.stringify(res))
 
                             let flightId = res.body.request.airline.requestedCode;
                             let maxPositions = res.body.request.maxPositions.requested;
-                            let fLNumber = res.body.flightTrack[0].flightNumber;
-                            let carrierCode = res.body.flightTrack[0].carrierFsCode;
-                            let departureDate = res.body.flightTrack[0].departureDate.dateLocal;
+                            console.log("logging flight id " + flightId);
+                            console.log("logging maxPositions " + maxPositions);
+                            let fLNumber = res.body.flightTracks[0].flightNumber;
+                            let carrierCode = res.body.flightTracks[0].carrierFsCode;
+                            let departureDate = res.body.flightTracks[0].departureDate.dateLocal;
                             let airName = res.body.appendix.airlines[0].name;
 
                             let airPortName = res.body.appendix.airports[0].name;
@@ -171,8 +173,7 @@ app.post('/', function (req, res) {
                             let airPortlat = res.body.appendix.airports[0].latitude;
                             let airPortlong = res.body.appendix.airports[0].longitude;
 
-                            console.log("logging flight id " + flightId);
-                            console.log("logging maxPositions " + maxPositions);
+
 
                             FlightTrackByDatedata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong} `;
                             assistant.ask(FlightTrackByDatedata);
