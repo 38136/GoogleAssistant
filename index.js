@@ -20,6 +20,11 @@ app.use(bodyParser.json({
 
 // get by action
 
+
+let startdate = "2017-09-13";
+
+
+
 const TrackByFlight_ID = "TrackByFlightID";
 const TrackByStarting_Date = "TrackByStartingDate";
 const Help_Intent = "HelpIntent";
@@ -116,16 +121,39 @@ app.post('/', function (req, res) {
         var flightNumber = assistant.getArgument('flightNumber');
         console.log("date is been displayed" + startDate);
         console.log("the response is " + response);
-        var year = Date(startDate).getFullYear();
-
-        var month = Date(startDate).getMonth();
-        var day = Date(startDate).getDate();
-        console.log("this is year" + year);
-        console.log("this is month" + month);
-        console.log("this is day" + day);
 
 
-        let binddate = month + "/" + day + "/" + year;
+
+        var date = new Date(startDate);
+
+        var year = date.getFullYear();
+        var current_month = date.getMonth() + 1;
+        var month = (current_month < 10 ? "0" : "") + current_month;
+        var current_day = date.getDate();
+        var day = (current_day < 10 ? "0" : "") + current_day;
+
+        console.log("the hours is :" + year);
+        console.log("the hours is :" + month);
+        console.log("the hours is :" + day);
+
+
+
+        // var year = Date(startDate).getFullYear();
+
+        // var month = Date(startDate).getMonth();
+        // var day = Date(startDate).getDate();
+
+        // var year = Date(startDate).getFullYear();
+
+        // var month = Date(startDate).getMonth();
+        // var day = Date(startDate).getDate();
+
+        // console.log("this is year" + year);
+        // console.log("this is month" + month);
+        // console.log("this is day" + day);
+
+
+        // let binddate = month + "/" + day + "/" + year;
 
         if (flightNumber) {
             if (AirLineCode) {
