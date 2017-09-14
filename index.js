@@ -175,20 +175,20 @@ app.post('/', function (req, res) {
 
 
 
-                            FlightTrackByDatedata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong} `;
+                            FlightTrackByDatedata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
                             assistant.ask(FlightTrackByDatedata);
                             //  response.say(JSON.stringify(res));
                             response.send();
                         });
                     return k;
                 } else {
-                    assistant.ask("please give me your Arrival date");
+                    assistant.ask("Give me your Arrival date");
                 }
             } else {
                 assistant.ask("please give me your Air line code example AA");
             }
         } else {
-            assistant.ask("please tell me your Flight Number example 100");
+            assistant.ask("Give me your Flight Number. example 100");
         }
     }
 
