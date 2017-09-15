@@ -1,3 +1,6 @@
+<!--https://maps.googleapis.com/maps/api/staticmap?center=45.588995,-122.592901&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4-->
+
+
 <div>
     <style>
         #map {
@@ -38,8 +41,8 @@
                 },
                 map: map,
                 icon: 'http://peaware.pilotedge.net/images/icon_fs_enr.png'
-                                // http://peaware.pilotedge.net/images/icon_dep.png --green
-                                // https://cdn4.iconfinder.com/data/icons/spirit20/marker-add.png -- red marker
+                // http://peaware.pilotedge.net/images/icon_dep.png --green
+                // https://cdn4.iconfinder.com/data/icons/spirit20/marker-add.png -- red marker
 
             });
 
@@ -55,3 +58,16 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA52NLURDIQMoKwMuh3v8LgNUNBAtkgUv4&callback=initMap">
     </script>
 </div>
+
+
+
+<!--
+function basicCard(app) { app.ask(app.buildRichResponse() // Create a basic card and add it to the rich response .addSimpleResponse(`Your
+flight Id is ${flightId} the maximum positions is ${maxPositions} and flight number is ${fLNumber} the carrier code is ${carrierCode}
+and the departure date is ${departureDate} and the airport name is ${airPortName} and the airport city name is ${airPortCity}
+and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to
+continue. `) .addBasicCard(app.buildBasicCard(`42 is an even composite number. It is composed of three distinct prime numbers
+multiplied together. It has a total of eight divisors. 42 is an abundant number, because the sum of its proper divisors 54
+is greater than itself. To count from 1 to 42 would take you about twenty-one…`) .setTitle('Flight tracked in') .addButton('Read
+more', 'https://example.google.com/mathandprimes') .setImage('https://example.google.com/42.png', 'Image alternate text')
+) ); }-->

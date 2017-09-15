@@ -94,90 +94,23 @@ app.post('/', function (req, res) {
                     let departureDate = res.body.flightTrack.departureDate.dateLocal;
                     let airName = res.body.appendix.airlines[0].name;
                     let airPortName = res.body.appendix.airports[0].name;
+                    let airPortLat = res.body.appendix.airports[0].latitude;
+                    let airPortLong = res.body.appendix.airports[0].longitude;
                     var airPortCity = res.body.appendix.airports[0].city;
                     var airPortCountryName = res.body.appendix.airports[0].countryName;
                     let airPortregionName = res.body.appendix.airports[0].regionName;
                     var airPortlat = res.body.appendix.airports[0].latitude;
                     var airPortlong = res.body.appendix.airports[0].longitude;
-
                     var deptdate = new Date(departureDate);
-
                     console.log("logging flight id " + flightId);
+                    // https: //maps.googleapis.com/maps/api/staticmap?center=45.588995,-122.592901&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4
+                   
 
-                    // FlightTrackdata = `Your flight Id is ${flightId} the maximum positions is ${maxPositions} and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is ${departureDate} and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
-
-
-                    // function renderStory(story) {
-                    let mapTemplate = `
-                            <div>
-    <style>
-        #map {
-            height: 150px;
-            width: 150px;
-        }
-    </style>
-    <h1>Flight Tracking</h1>
-    <div id="map"></div>
-    <script>
-        function initMap() {
-            // Map options
-            var options = {
-                zoom: 2,
-                center: {
-                    lat: ${airPortlat},
-                    lng: ${airPortlong}
-                }
-            }
-
-            // New map
-            var map = new google.maps.Map(document.getElementById('map'), options);
-
-            // Listen for click on map
-            google.maps.event.addListener(map, 'click', function (event) {
-                // Add marker
-                addMarker({
-                    coords: event.latLng
-                });
-            });
-
-
-            // Add marker
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: 42.4668,
-                    lng: -70.9495
-                },
-                map: map,
-                icon: 'http://booking.travelserver.net/images/icon_airport.gif'
-            });
-
-            var infoWindow = new google.maps.InfoWindow({
-                content: '<h1>${airPortCountryName}</h1></br><h2>${airPortCity}</h2>'
-            });
-
-            marker.addListener('click', function () {
-                infoWindow.open(map, marker);
-            });
-        }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA52NLURDIQMoKwMuh3v8LgNUNBAtkgUv4&callback=initMap">
-    </script>
-</div>
-            `
-                    //     return storyTemplate;
-                    // }
-                    // FlightTrackdata = mapTemplate;
-                    console.log("need to show the javascript" + mapTemplate);
-
-                    // assistant.ask(FlightTrackdata);
-                    // assistant.buildBasicCard(mapTemplate);
-                    assistant.buildRichResponse(mapTemplate);
-
-
-
-
-                    //  response.say(JSON.stringify(res));
-                    // response.send();
+                    assistant.ask(assistant.buildBasicCard()
+                        .addSimpleResponse(`Your flight Id is ${flightId} the maximum positions is ${maxPositions} and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is ${departureDate} and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue.`)
+                        .setTitle('Flight tracked in')
+                        .setImage(`https: //maps.googleapis.com/maps/api/staticmap?center=${airPortLat},${airPortLong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`,'Map not loaded')
+                    );
                 });
             return p;
         } else {
