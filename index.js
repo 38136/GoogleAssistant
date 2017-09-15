@@ -108,12 +108,12 @@ app.post('/', function (req, res) {
 
 
                     // function renderStory(story) {
-                    let storyTemplate = `
+                    let mapTemplate = `
                             <div>
     <style>
         #map {
-            height: 400px;
-            width: 100%;
+            height: 150px;
+            width: 150px;
         }
     </style>
     <h1>Flight Tracking</h1>
@@ -148,7 +148,7 @@ app.post('/', function (req, res) {
                     lng: -70.9495
                 },
                 map: map,
-                icon: 'http://peaware.pilotedge.net/images/icon_fs_enr.png'
+                icon: 'http://booking.travelserver.net/images/icon_airport.gif'
             });
 
             var infoWindow = new google.maps.InfoWindow({
@@ -166,10 +166,11 @@ app.post('/', function (req, res) {
             `
                     //     return storyTemplate;
                     // }
-                    FlightTrackdata = storyTemplate;
-                    console.log("need to show the javascript" + storyTemplate);
+                    // FlightTrackdata = mapTemplate;
+                    console.log("need to show the javascript" + mapTemplate);
 
-                    assistant.ask(FlightTrackdata);
+                    // assistant.ask(FlightTrackdata);
+                    assistant.buildBasicCard(mapTemplate);
 
 
 
