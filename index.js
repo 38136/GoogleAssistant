@@ -170,13 +170,14 @@ app.post('/', function (req, res) {
                     console.log("need to show the javascript" + mapTemplate);
 
                     // assistant.ask(FlightTrackdata);
-                    assistant.buildBasicCard(mapTemplate);
+                    // assistant.buildBasicCard(mapTemplate);
+                    assistant.buildRichResponse(mapTemplate);
 
 
 
 
                     //  response.say(JSON.stringify(res));
-                    response.send();
+                    // response.send();
                 });
             return p;
         } else {
