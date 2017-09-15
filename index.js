@@ -94,18 +94,86 @@ app.post('/', function (req, res) {
                     let departureDate = res.body.flightTrack.departureDate.dateLocal;
                     let airName = res.body.appendix.airlines[0].name;
                     let airPortName = res.body.appendix.airports[0].name;
-                    let airPortCity = res.body.appendix.airports[0].city;
-                    let airPortCountryName = res.body.appendix.airports[0].countryName;
+                    var airPortCity = res.body.appendix.airports[0].city;
+                    var airPortCountryName = res.body.appendix.airports[0].countryName;
                     let airPortregionName = res.body.appendix.airports[0].regionName;
-                    let airPortlat = res.body.appendix.airports[0].latitude;
-                    let airPortlong = res.body.appendix.airports[0].longitude;
+                    var airPortlat = res.body.appendix.airports[0].latitude;
+                    var airPortlong = res.body.appendix.airports[0].longitude;
 
                     var deptdate = new Date(departureDate);
 
                     console.log("logging flight id " + flightId);
 
-                    FlightTrackdata = `Your flight Id is ${flightId} the maximum positions is ${maxPositions} and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is ${departureDate} and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
+                    // FlightTrackdata = `Your flight Id is ${flightId} the maximum positions is ${maxPositions} and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is ${departureDate} and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
+
+
+                    // function renderStory(story) {
+                    let storyTemplate = `
+                            <div>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <h1>Flight Tracking</h1>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            // Map options
+            var options = {
+                zoom: 2,
+                center: {
+                    lat: ${airPortlat},
+                    lng: ${airPortlong}
+                }
+            }
+
+            // New map
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+            // Listen for click on map
+            google.maps.event.addListener(map, 'click', function (event) {
+                // Add marker
+                addMarker({
+                    coords: event.latLng
+                });
+            });
+
+
+            // Add marker
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: 42.4668,
+                    lng: -70.9495
+                },
+                map: map,
+                icon: 'http://peaware.pilotedge.net/images/icon_fs_enr.png'
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: '<h1>${airPortCountryName}</h1></br><h2>${airPortCity}</h2>'
+            });
+
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA52NLURDIQMoKwMuh3v8LgNUNBAtkgUv4&callback=initMap">
+    </script>
+</div>
+            `
+                    //     return storyTemplate;
+                    // }
+                    FlightTrackdata = storyTemplate;
+                    console.log("need to show the javascript" + storyTemplate);
+
                     assistant.ask(FlightTrackdata);
+
+
+
+
                     //  response.say(JSON.stringify(res));
                     response.send();
                 });
