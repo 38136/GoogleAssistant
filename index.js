@@ -19,39 +19,11 @@ app.use(bodyParser.json({
 }));
 
 // get by action
-
-
-let startdate = "2017-09-13";
-
-
-
 const TrackByFlight_ID = "TrackByFlightID";
 const TrackByStarting_Date = "TrackByStartingDate";
 const Help_Intent = "HelpIntent";
 const WelcomeIntent = "input.welcome";
 const quit_Intent = "quit_Intent";
-
-// Options are optional; 
-// defaults to retrieve all currently active airlines 
-// api.getAirlines(options, callback)
-// // Options (iata, icao, fs are mutually exclusive): 
-// var options = {
-//     all: {
-//         Boolean
-//     },
-//     date: {
-//         Date
-//     },
-//     iata: {
-//         String
-//     },
-//     icao: {
-//         String
-//     },
-//     fs: {
-//         String
-//     },
-// }
 
 app.post('/', function (req, res) {
     const assistant = new Assistant({
@@ -103,13 +75,13 @@ app.post('/', function (req, res) {
                     var airPortlong = res.body.appendix.airports[0].longitude;
                     var deptdate = new Date(departureDate);
                     console.log("logging flight id " + flightId);
-                    // https: //maps.googleapis.com/maps/api/staticmap?center=45.588995,-122.592901&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4
-                   
 
-                    assistant.ask(assistant.buildBasicCard()
-                        .addSimpleResponse(`Your flight Id is ${flightId} the maximum positions is ${maxPositions} and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is ${departureDate} and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue.`)
-                        .setTitle('Flight tracked in')
-                        .setImage(`https: //maps.googleapis.com/maps/api/staticmap?center=${airPortLat},${airPortLong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`,'Map not loaded')
+                    assistant.ask(assistant.buildRichResponse()
+                        .addSimpleResponse(`Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue.`)
+                        .addBasicCard(assistant.buildBasicCard(`Your flight is in ${airPortName} currently`)
+                            .setTitle('Route to airport city')
+                            .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortLat},${airPortLong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
+                        )
                     );
                 });
             return p;
@@ -123,9 +95,6 @@ app.post('/', function (req, res) {
         var startDate = assistant.getArgument('startDate');
         var flightNumber = assistant.getArgument('flightNumber');
         console.log("date is been displayed" + startDate);
-        console.log("the response is " + response);
-
-
 
         var date = new Date(startDate);
 
@@ -136,11 +105,6 @@ app.post('/', function (req, res) {
         var day = (current_day < 10 ? "0" : "") + current_day;
 
         console.log("the hours is :" + year);
-        console.log("the hours is :" + month);
-        console.log("the hours is :" + day);
-        console.log("the response is " + AirLineCode);
-        console.log("the response is " + flightNumber);
-
         if (flightNumber) {
             if (AirLineCode) {
                 if (startDate) {
@@ -178,9 +142,16 @@ app.post('/', function (req, res) {
 
 
 
-                            FlightTrackByDatedata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
-                            assistant.ask(FlightTrackByDatedata);
-                            //  response.say(JSON.stringify(res));
+                            // FlightTrackByDatedata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
+                            assistant.ask(assistant.buildRichResponse()
+                                // Create a basic card and add it to the rich response
+
+                                .addSimpleResponse(`Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue.`)
+                                .addBasicCard(assistant.buildBasicCard(`Your flight is in ${airPortName} currently`)
+                                    .setTitle('Route to airport city')
+                                    .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortlat},${airPortlong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
+                                )
+                            );
                             response.send();
                         });
                     return k;
