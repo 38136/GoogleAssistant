@@ -62,7 +62,6 @@ app.post('/', function (req, res) {
                     let maxPositions = res.body.request.maxPositions.requested;
                     let fLNumber = res.body.flightTrack.flightNumber;
                     let carrierCode = res.body.flightTrack.carrierFsCode;
-                    // "dateLocal": "2017-09-14T07:05:00.000",
                     let departureDate = res.body.flightTrack.departureDate.dateLocal;
                     let airName = res.body.appendix.airlines[0].name;
                     let airPortName = res.body.appendix.airports[0].name;
@@ -75,12 +74,13 @@ app.post('/', function (req, res) {
                     var airPortlong = res.body.appendix.airports[0].longitude;
                     var deptdate = new Date(departureDate);
                     console.log("logging flight id " + flightId);
-
+                    // https://maps.googleapis.com/maps/api/staticmap?center=40.642335,-73.78817&zoom=12&size=300x300&maptype=hybrid&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4
                     assistant.ask(assistant.buildRichResponse()
                         .addSimpleResponse(`Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue.`)
                         .addBasicCard(assistant.buildBasicCard(`Your flight is in ${airPortName} currently`)
                             .setTitle('Route to airport city')
-                            .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortLat},${airPortLong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
+                            // .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortLat},${airPortLong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
+                            .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortLat},${airPortLong}&zoom=12&size=300x300&maptype=hybrid&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
                         )
                     );
                 });
@@ -132,24 +132,20 @@ app.post('/', function (req, res) {
                             let carrierCode = res.body.flightTracks[0].carrierFsCode;
                             let departureDate = res.body.flightTracks[0].departureDate.dateLocal;
                             let airName = res.body.appendix.airlines[0].name;
-
                             let airPortName = res.body.appendix.airports[0].name;
                             let airPortCity = res.body.appendix.airports[0].city;
                             let airPortCountryName = res.body.appendix.airports[0].countryName;
                             let airPortregionName = res.body.appendix.airports[0].regionName;
                             let airPortlat = res.body.appendix.airports[0].latitude;
                             let airPortlong = res.body.appendix.airports[0].longitude;
-
-
-
-                            // FlightTrackByDatedata = `Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue. `;
                             assistant.ask(assistant.buildRichResponse()
                                 // Create a basic card and add it to the rich response
-
                                 .addSimpleResponse(`Your flight Id is ${flightId}  the maximum positions is ${maxPositions}  and flight number is ${fLNumber} the carrier code is  ${carrierCode} and the departure date is today and the airport name is ${airPortName} and the airport city name is ${airPortCity} and the country name is ${airPortCountryName} the lattitude are ${airPortlat} logitude is ${airPortlong}. Do you want to continue.`)
                                 .addBasicCard(assistant.buildBasicCard(`Your flight is in ${airPortName} currently`)
                                     .setTitle('Route to airport city')
-                                    .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortlat},${airPortlong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
+                                    // .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortlat},${airPortlong}&zoom=14&size=400x400&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
+                                    .setImage(`https://maps.googleapis.com/maps/api/staticmap?center=${airPortLat},${airPortLong}&zoom=12&size=300x300&maptype=hybrid&key=AIzaSyBdMRmNmPYEkXlEjFe30tIGzAVOwxMdij4`, 'Image alternate text')
+
                                 )
                             );
                             response.send();
